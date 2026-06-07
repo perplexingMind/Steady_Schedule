@@ -164,3 +164,6 @@ body.auth-page{overflow:hidden}
 
 .tap-reveal:active{transform:scale(.98);box-shadow:0 0 0 1px rgba(212,175,55,.35) inset;background:rgba(212,175,55,.18)}
 @media (hover:hover){.tap-reveal:hover{transform:translateY(-1px)}}
+
+.btn:active{transform:translateY(1px) scale(.99);filter:brightness(.96)}
+.btn:focus-visible{outline:2px solid rgba(212,175,55,.7);outline-offset:2px}
