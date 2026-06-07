@@ -205,3 +205,8 @@ body.auth-page{overflow:hidden}
 .tap-mesh.used{opacity:.35;transform:scale(.98);filter:saturate(.75)}
 .tap-mesh-label{padding:10px 18px;border-radius:999px;background:rgba(0,0,0,.18);color:var(--cream);letter-spacing:.04em}
 .tap-area:active .tap-mesh{transform:scale(.99)}
+
+.tap-area{position:relative}
+.tap-mesh{z-index:1;position:relative}
+.auth-center{z-index:2}
+.auth-box{position:relative;z-index:3}
