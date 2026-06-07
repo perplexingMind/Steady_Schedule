@@ -126,3 +126,12 @@ footer{border-top:1px solid var(--line);padding:40px 24px;text-align:center;colo
 .auth-lock .auth-void-top,.auth-lock .auth-void-bottom{display:none}
 .auth-lock .auth-box{margin:0 auto;max-height:calc(100vh - 48px);overflow:auto}
 body.auth-page{overflow:hidden}
+
+.auth-page{overflow-y:auto;overflow-x:hidden}
+.auth-flow{min-height:200vh}
+.auth-intro{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.auth-intro-inner{max-width:760px;width:100%;text-align:center;padding-top:40px}
+.auth-kicker{letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-size:12px;margin-bottom:10px}
+.auth-intro h1{font-size:clamp(44px,8vw,88px);line-height:1.02;margin:0 0 16px}
+.auth-scroll-hint{margin-top:28px;color:var(--muted);font-size:13px}
+.auth-center{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
