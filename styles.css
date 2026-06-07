@@ -186,3 +186,16 @@ body.auth-page{overflow:hidden}
 .btn.is-loading{opacity:.8;pointer-events:none;position:relative}
 .btn.is-loading::after{content:"";width:14px;height:14px;border:2px solid rgba(0,0,0,.25);border-top-color:rgba(0,0,0,.75);border-radius:50%;display:inline-block;margin-left:10px;vertical-align:middle;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+.booking-shell{display:grid;grid-template-columns:1.3fr .9fr;gap:20px;align-items:stretch}
+.booking-calendar,.booking-side .feature-card{border:1px solid rgba(255,255,255,.08);border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.025));padding:22px}
+.calendar-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:14px}
+.calendar-head strong{font-size:22px}
+.calendar-head span{color:var(--muted);font-size:13px}
+.calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px}
+.day{aspect-ratio:1;border-radius:16px;border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.03);color:var(--cream);font-weight:600}
+.day.muted{background:transparent;color:var(--muted);border-style:dashed;font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+.day.empty{border:none;background:transparent}
+.day.active{background:rgba(212,175,55,.12);border-color:rgba(212,175,55,.35)}
+.day.selected{background:var(--gold);color:#111;border-color:var(--gold);box-shadow:0 10px 30px rgba(212,175,55,.2)}
+@media (max-width:900px){.booking-shell{grid-template-columns:1fr}.calendar-grid{gap:8px}}
