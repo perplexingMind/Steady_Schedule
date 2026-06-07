@@ -150,3 +150,10 @@ body.auth-page{overflow:hidden}
 .auth-intro{min-height:100vh}
 .auth-center{min-height:100vh;position:sticky;top:0}
 .auth-box{backdrop-filter:blur(8px)}
+
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
+.auth-flow{overflow-y:auto;height:100vh}
+.snap-flow{scroll-snap-type:y mandatory}
+.auth-panel{scroll-snap-align:center;scroll-snap-stop:always;min-height:100vh}
+.auth-center{position:relative}
+body.auth-page{overflow:hidden}
