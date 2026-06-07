@@ -273,7 +273,7 @@
   <section id="guest-app" class="dashboard app-panel">
     <h2>Guest View</h2>
     <div class="view-switcher">
-      <button class="btn">Search</button><button class="btn btn-ghost">Book</button><button class="btn btn-ghost">Nearby</button>
+      <button class="btn" data-action="search">Search</button><button class="btn btn-ghost" data-action="book">Book</button><button class="btn btn-ghost" data-action="nearby">Nearby</button>
     </div>
     <div class="dash-note">This view always feels like a first-time visitor with search-first discovery. Standard placement is the default; businesses can pay for larger, front-forward priority tiles at the top of the list.</div>
     <div class="dash-grid">
@@ -289,8 +289,60 @@
     <p>Steady Schedule · £4.59/month · No tiers · Built for convenience and reliability</p>
   </footer>
   <script>
-    function openBusiness(name){alert('Opening business: ' + name)}
-    function openPriority(){alert('Priority placement options opened')}
+    const state = {
+      role: 'guest',
+      selectedBusiness: null,
+      starred: ['Studio Nine', 'Gold Cut Barber'],
+      booked: ['Clean Slate Salon', 'Northside Clinic']
+    };
+
+    const tiles = document.querySelectorAll('.interactive-card');
+    tiles.forEach(tile => {
+      tile.addEventListener('click', () => {
+        const name = tile.querySelector('h4')?.textContent || 'Item';
+        state.selectedBusiness = name;
+        alert('Opening ' + name + ' details');
+      });
+    });
+
+    function openBusiness(name){
+      state.selectedBusiness = name;
+      alert('Opening business: ' + name);
+    }
+
+    function openPriority(){
+      alert('Priority placement options opened');
+    }
+
+    document.querySelectorAll('.view-switcher .btn, .gateway .btn, .search-row .btn, .booking .btn, .market-actions .pill').forEach(el => {
+      el.style.cursor = 'pointer';
+    });
+
+    document.querySelectorAll('#business-app .interactive-card').forEach(card => {
+      card.addEventListener('click', () => alert('Business dashboard module opened'));
+    });
+    document.querySelectorAll('#customer-app .interactive-card').forEach(card => {
+      card.addEventListener('click', () => alert('Customer module opened'));
+    });
+    document.querySelectorAll('#guest-app .interactive-card').forEach(card => {
+      card.addEventListener('click', () => alert('Guest module opened'));
+    });
+
+    document.querySelectorAll('.view-switcher .btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        alert(btn.textContent + ' view selected');
+      });
+    });
+
+    const searchBtn = document.querySelector('.search-row .btn');
+    const searchInput = document.querySelector('.search-input');
+    searchBtn?.addEventListener('click', () => {
+      alert('Searching for: ' + (searchInput?.value || 'everything'));
+    });
+
+    document.querySelectorAll('.booking-form .btn').forEach(btn => {
+      btn.addEventListener('click', () => alert('Booking flow continued'));
+    });
   </script>
 </body>
 </html>
