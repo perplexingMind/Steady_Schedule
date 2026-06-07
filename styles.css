@@ -157,3 +157,7 @@ html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
 .auth-panel{scroll-snap-align:center;scroll-snap-stop:always;min-height:100vh}
 .auth-center{position:relative}
 body.auth-page{overflow:hidden}
+
+.tap-flow{min-height:100vh}
+.tap-reveal{display:inline-flex;margin:24px auto 0;padding:12px 18px;border:1px solid rgba(212,175,55,.25);background:rgba(212,175,55,.08);color:var(--cream);border-radius:999px;cursor:pointer}
+.tap-reveal:hover{background:rgba(212,175,55,.14)}
