@@ -78,6 +78,7 @@
     footer{padding:40px 24px;text-align:center;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
     @media(max-width:768px){.hero h1{font-size:32px}.role-cards{flex-direction:column}.biz-grid{flex-direction:column}}
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
   <div id="app-state" style="display:none"></div>
@@ -375,5 +376,81 @@
     window.setRole = setRole;
     setRole('guest');
 </script>
+  <script>
+    const SUPABASE_URL = 'https://YOUR_PROJECT.supabase.co';
+    const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY';
+    const clientReady = typeof supabase !== 'undefined' && SUPABASE_URL.includes('supabase.co') && !SUPABASE_ANON_KEY.includes('YOUR_');
+    const sb = clientReady ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
+    const app = { role: 'guest', selectedBusiness: null, search: '' };
+    const el = s => document.querySelector(s);
+    const els = s => Array.from(document.querySelectorAll(s));
+
+    function setRole(role){
+      app.role = role;
+      stateBadge.style.display = 'block';
+      stateBadge.textContent = 'Role: ' + role + (sb ? ' · live' : ' · demo');
+      els('.app-panel').forEach(p => p.style.display = 'none');
+      const map = {business:'#business-app', customer:'#customer-app', guest:'#guest-app'};
+      el(map[role])?.style.setProperty('display','block');
+      el(map[role])?.scrollIntoView({behavior:'smooth', block:'start'});
+      renderRoleData();
+    }
+
+    async function loadSession(){
+      if(!sb) return;
+      const { data } = await sb.auth.getSession();
+      const role = data?.session?.user?.user_metadata?.role || 'guest';
+      setRole(role);
+    }
+
+    async function fetchBusinesses(){
+      if(!sb) return [
+        {name:'Featured Barbers', category:'Barber', featured:true},
+        {name:'Salons', category:'Salon', featured:false},
+        {name:'Studios', category:'Studio', featured:false}
+      ];
+      const { data } = await sb.from('business_profiles').select('name,category,is_featured,priority_level,is_public').eq('is_public', true).order('is_featured', {ascending:false}).order('priority_level', {ascending:false}).limit(12);
+      return data || [];
+    }
+
+    async function renderRoleData(){
+      const marketplace = el('#marketplace .tile-grid');
+      if(!marketplace) return;
+      const businesses = await fetchBusinesses();
+      if(businesses?.length){
+        marketplace.innerHTML = businesses.map((b, i) => `<div class="tile ${i===0?'tile-lg':'tile-md'} interactive-card" onclick="openBusiness('${b.name.replace(/'/g, "\'")}')"><h4>${b.name}</h4><p>${b.category}${b.is_featured ? ' · featured' : ''}</p></div>`).join('');
+        els('.interactive-card').forEach(card => card.addEventListener('click', () => {
+          const name = card.querySelector('h4')?.textContent || 'Item';
+          openBusiness(name);
+        }));
+      }
+    }
+
+    const stateBadge = document.createElement('div');
+    stateBadge.id = 'state-badge';
+    stateBadge.style.cssText = 'position:fixed;bottom:16px;right:16px;background:#121212;color:#f5f1e8;border:1px solid #2a2a2a;padding:10px 14px;border-radius:999px;font-size:12px;z-index:9999;display:none;';
+    stateBadge.textContent = 'State ready';
+    document.body.appendChild(stateBadge);
+
+    document.querySelectorAll('#gateway .role-card .btn').forEach(btn => btn.addEventListener('click', e => {
+      const t = e.target.textContent.toLowerCase();
+      setRole(t.includes('business') ? 'business' : t.includes('customer') ? 'customer' : 'guest');
+    }));
+
+    function openBusiness(name){ app.selectedBusiness = name; stateBadge.style.display='block'; stateBadge.textContent='Selected: '+name; alert('Opening business: ' + name); }
+    function openPriority(){ setRole('business'); alert('Priority placement options opened'); }
+
+    const searchBtn = document.querySelector('.search-row .btn');
+    const searchInput = document.querySelector('.search-input');
+    searchBtn?.addEventListener('click', () => { app.search = searchInput?.value || ''; stateBadge.style.display='block'; stateBadge.textContent='Search: ' + (app.search || 'all'); alert('Searching for: ' + (app.search || 'everything')); });
+
+    document.querySelectorAll('.booking-form .btn').forEach(btn => btn.addEventListener('click', () => alert('Booking flow continued')));
+    document.querySelectorAll('.view-switcher .btn').forEach(btn => btn.addEventListener('click', () => setRole(app.role)));
+    document.querySelectorAll('.market-actions .pill').forEach(p => p.addEventListener('click', () => setRole('business')));
+
+    renderRoleData();
+    loadSession();
+  </script>
 </body>
 </html>
