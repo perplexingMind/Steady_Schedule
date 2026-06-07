@@ -161,3 +161,6 @@ body.auth-page{overflow:hidden}
 .tap-flow{min-height:100vh}
 .tap-reveal{display:inline-flex;margin:24px auto 0;padding:12px 18px;border:1px solid rgba(212,175,55,.25);background:rgba(212,175,55,.08);color:var(--cream);border-radius:999px;cursor:pointer}
 .tap-reveal:hover{background:rgba(212,175,55,.14)}
+
+.tap-reveal:active{transform:scale(.98);box-shadow:0 0 0 1px rgba(212,175,55,.35) inset;background:rgba(212,175,55,.18)}
+@media (hover:hover){.tap-reveal:hover{transform:translateY(-1px)}}
