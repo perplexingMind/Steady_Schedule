@@ -171,3 +171,14 @@ body.auth-page{overflow:hidden}
 .tap-area{cursor:pointer;touch-action:manipulation}
 .tap-area:active .tap-reveal,.tap-area:active .auth-intro-inner{transform:scale(.995)}
 .tap-reveal-full{display:inline-block;padding:12px 18px;border:1px solid rgba(212,175,55,.25);background:rgba(212,175,55,.08);color:var(--cream);border-radius:999px;margin-top:24px}
+
+.business-tile-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:120px;gap:18px}
+.tile{display:flex;flex-direction:column;justify-content:flex-end;padding:18px;border:1px solid rgba(255,255,255,.08);border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));color:var(--cream);text-decoration:none;overflow:hidden;min-height:120px}
+.tile span{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.tile strong{font-size:24px;line-height:1.05;margin-bottom:6px}
+.tile small{color:var(--muted)}
+.tile-wide{grid-column:span 3;grid-row:span 2}
+.tile-tall{grid-column:span 2;grid-row:span 3}
+.tile-medium{grid-column:span 2;grid-row:span 2}
+.tile-small{grid-column:span 1;grid-row:span 2}
+@media (max-width:900px){.business-tile-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:auto}.tile-wide,.tile-tall,.tile-medium,.tile-small{grid-column:span 2;grid-row:auto}}
