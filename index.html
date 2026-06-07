@@ -29,10 +29,14 @@
     .role-card p{color:var(--muted);margin:0 0 20px;font-size:14px;line-height:1.6}
     .marketplace{padding:60px 24px;background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
     .marketplace h2{font-size:32px;margin:0 0 40px;text-align:center;font-weight:600}
-    .biz-grid{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
-    .biz-card{background:var(--bg);border:1px solid var(--line);padding:20px;border-radius:4px;width:320px}
-    .biz-card h4{font-size:18px;margin:0 0 8px;color:var(--accent);font-weight:600}
-    .biz-card p{color:var(--muted);margin:0;font-size:14px;line-height:1.6}
+    .tile-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;max-width:1200px;margin:0 auto}
+    .tile{background:var(--bg);border:1px solid var(--line);padding:22px;border-radius:4px;min-height:140px;display:flex;flex-direction:column;justify-content:flex-end}
+    .tile h4{font-size:18px;margin:0 0 8px;color:var(--accent);font-weight:600}
+    .tile p{color:var(--muted);margin:0;font-size:14px;line-height:1.6}
+    .tile-sm{grid-column:span 3}
+    .tile-md{grid-column:span 4}
+    .tile-lg{grid-column:span 5;min-height:220px}
+    .priority{border-color:var(--accent)}
     .layers{padding:60px 24px}
     .layers h2{font-size:32px;margin:0 0 40px;text-align:center;font-weight:600}
     .layer-grid{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
@@ -48,6 +52,7 @@
     .dashboard{padding:60px 24px}
     .dashboard h2{font-size:32px;margin:0 0 40px;text-align:center;font-weight:600}
     .dash-grid{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+    .dash-note{max-width:900px;margin:0 auto 28px;color:var(--muted);text-align:center}
     .dash-section{background:var(--card);border:1px solid var(--line);padding:24px;border-radius:4px;width:340px}
     .dash-section h3{font-size:18px;margin:0 0 12px;color:var(--accent);font-weight:600}
     .dash-section ul{margin:0 0 0;padding:0 0 0 20px;color:var(--muted);font-size:14px;line-height:1.8}
@@ -98,35 +103,58 @@
 
   <section id="marketplace" class="marketplace">
     <h2>Find Services</h2>
-    <div class="biz-grid">
-      <div class="biz-card">
-        <h4>Barber Shops</h4>
-        <p>Book cuts, trims, and styling sessions</p>
+    <div class="tile-grid">
+      <div class="tile tile-lg">
+        <h4>Featured Barbers</h4>
+        <p>Priority placement for popular listings</p>
       </div>
-      <div class="biz-card">
+      <div class="tile tile-md">
         <h4>Salons</h4>
         <p>Haircare, coloring, and treatments</p>
       </div>
-      <div class="biz-card">
+      <div class="tile tile-sm">
         <h4>Studios</h4>
-        <p>Creative sessions and appointments</p>
+        <p>Creative sessions</p>
       </div>
-      <div class="biz-card">
+      <div class="tile tile-md">
         <h4>Clinics</h4>
         <p>Health and wellness services</p>
+      </div>
+      <div class="tile tile-sm">
+        <h4>Home Visits</h4>
+        <p>Mobile bookings</p>
+      </div>
+      <div class="tile tile-lg priority">
+        <h4>Priority Placement</h4>
+        <p>Charge extra for boosted visibility and faster booking flow</p>
       </div>
     </div>
   </section>
 
   <section id="booking" class="booking">
-    <h2>Book a Service</h2>
+    <h2>Book from Places You Know</h2>
     <div class="booking-form">
+      <label for="saved">Previously Visited or Starred</label>
+      <select id="saved">
+        <option>Starred: Studio Nine</option>
+        <option>Visited: Gold Cut Barber</option>
+        <option>Starred: Clean Slate Salon</option>
+        <option>Visited: Northside Clinic</option>
+      </select>
+
       <label for="service">Service</label>
       <select id="service">
         <option>Cut & Style</option>
         <option>Hair Coloring</option>
         <option>Styling Session</option>
         <option>Consultation</option>
+      </select>
+
+      <label for="priority">Priority Booking</label>
+      <select id="priority">
+        <option>Standard</option>
+        <option>Priority (+ fee)</option>
+        <option>Featured Slot (+ higher fee)</option>
       </select>
 
       <label for="date">Date</label>
@@ -185,6 +213,7 @@
 
   <section id="dashboard" class="dashboard">
     <h2>Business Dashboard</h2>
+    <p class="dash-note">Priority placement can be sold as an add-on, with boosted visibility, featured tiles, and faster booking access.</p>
     <div class="dash-grid">
       <div class="dash-section">
         <h3>Manage Listings</h3>
@@ -196,10 +225,19 @@
         </ul>
       </div>
       <div class="dash-section">
+        <h3>Priority Sales</h3>
+        <ul>
+          <p>Charge extra for priority</p>
+          <p>Boost tile placement</p>
+          <p>Promote starred vendors</p>
+          <p>Track upgraded listings</p>
+        </ul>
+      </div>
+      <div class="dash-section">
         <h3>Booking Management</h3>
         <ul>
           <p>View upcoming bookings</p>
-          <p>Confirm/appointment requests</p>
+          <p>Confirm appointment requests</p>
           <p>Manage calendar</p>
           <p>Send reminders</p>
         </ul>
