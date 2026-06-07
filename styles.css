@@ -145,3 +145,8 @@ body.auth-page{overflow:hidden}
 
 .onboard-checklist .feature-card h3{margin-top:0}
 .onboard-checklist .feature-card p{margin-bottom:0}
+
+.unlock-scroll{min-height:unset}
+.auth-intro{min-height:100vh}
+.auth-center{min-height:100vh;position:sticky;top:0}
+.auth-box{backdrop-filter:blur(8px)}
