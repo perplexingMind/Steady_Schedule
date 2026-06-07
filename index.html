@@ -27,7 +27,7 @@
     .view-switcher{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:0 0 18px}
     .interactive-card{cursor:pointer;transition:transform .15s ease,border-color .15s ease}
     .interactive-card:hover{transform:translateY(-2px);border-color:var(--accent)}
-    .app-panel{scroll-margin-top:90px}
+    .app-panel{scroll-margin-top:90px;display:none}
     .gateway{padding:60px 24px;text-align:center}
     .gateway h2{font-size:32px;margin:0 0 40px;font-weight:600;letter-spacing:-0.3px}
     .role-cards{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
@@ -80,6 +80,7 @@
   </style>
 </head>
 <body>
+  <div id="app-state" style="display:none"></div>
   <header>
     <div class="header-inner">
       <div class="logo">Steady Schedule</div>
@@ -289,60 +290,90 @@
     <p>Steady Schedule · £4.59/month · No tiers · Built for convenience and reliability</p>
   </footer>
   <script>
-    const state = {
+    const app = {
       role: 'guest',
       selectedBusiness: null,
-      starred: ['Studio Nine', 'Gold Cut Barber'],
-      booked: ['Clean Slate Salon', 'Northside Clinic']
+      search: '',
+      favorites: ['Studio Nine', 'Gold Cut Barber'],
+      bookings: ['Clean Slate Salon', 'Northside Clinic'],
+      businessPriority: ['Featured Barbers'],
+      guestRecent: ['Featured Barbers', 'Salons']
     };
 
-    const tiles = document.querySelectorAll('.interactive-card');
-    tiles.forEach(tile => {
-      tile.addEventListener('click', () => {
-        const name = tile.querySelector('h4')?.textContent || 'Item';
-        state.selectedBusiness = name;
-        alert('Opening ' + name + ' details');
+    const stateBadge = document.createElement('div');
+    stateBadge.id = 'state-badge';
+    stateBadge.style.cssText = 'position:fixed;bottom:16px;right:16px;background:#121212;color:#f5f1e8;border:1px solid #2a2a2a;padding:10px 14px;border-radius:999px;font-size:12px;z-index:9999;display:none;';
+    stateBadge.textContent = 'State ready';
+    document.body.appendChild(stateBadge);
+
+    function setRole(role){
+      app.role = role;
+      stateBadge.style.display = 'block';
+      stateBadge.textContent = 'Role: ' + role;
+      document.querySelectorAll('.app-panel').forEach(p => p.style.display = 'none');
+      const map = {business:'#business-app', customer:'#customer-app', guest:'#guest-app'};
+      const target = document.querySelector(map[role]);
+      if(target) target.style.display = 'block';
+      document.getElementById(role === 'business' ? 'business-app' : role === 'customer' ? 'customer-app' : 'guest-app')?.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+
+    document.querySelectorAll('#gateway .role-card .btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        const text = e.target.textContent.toLowerCase();
+        if(text.includes('business')) setRole('business');
+        else if(text.includes('customer')) setRole('customer');
+        else setRole('guest');
       });
     });
 
     function openBusiness(name){
-      state.selectedBusiness = name;
+      app.selectedBusiness = name;
+      stateBadge.style.display = 'block';
+      stateBadge.textContent = 'Selected: ' + name;
+      document.querySelector('#booking .booking-summary')?.scrollIntoView({behavior:'smooth'});
       alert('Opening business: ' + name);
     }
 
     function openPriority(){
+      setRole('business');
       alert('Priority placement options opened');
     }
 
-    document.querySelectorAll('.view-switcher .btn, .gateway .btn, .search-row .btn, .booking .btn, .market-actions .pill').forEach(el => {
-      el.style.cursor = 'pointer';
-    });
-
-    document.querySelectorAll('#business-app .interactive-card').forEach(card => {
-      card.addEventListener('click', () => alert('Business dashboard module opened'));
-    });
-    document.querySelectorAll('#customer-app .interactive-card').forEach(card => {
-      card.addEventListener('click', () => alert('Customer module opened'));
-    });
-    document.querySelectorAll('#guest-app .interactive-card').forEach(card => {
-      card.addEventListener('click', () => alert('Guest module opened'));
-    });
-
-    document.querySelectorAll('.view-switcher .btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        alert(btn.textContent + ' view selected');
+    document.querySelectorAll('.interactive-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const name = card.querySelector('h4')?.textContent || 'Item';
+        openBusiness(name);
       });
     });
 
     const searchBtn = document.querySelector('.search-row .btn');
     const searchInput = document.querySelector('.search-input');
     searchBtn?.addEventListener('click', () => {
-      alert('Searching for: ' + (searchInput?.value || 'everything'));
+      app.search = searchInput?.value || '';
+      stateBadge.style.display = 'block';
+      stateBadge.textContent = 'Search: ' + (app.search || 'all');
+      alert('Searching for: ' + (app.search || 'everything'));
+    });
+
+    document.querySelectorAll('#business-app .interactive-card').forEach(card => card.addEventListener('click', () => setRole('business')));
+    document.querySelectorAll('#customer-app .interactive-card').forEach(card => card.addEventListener('click', () => setRole('customer')));
+    document.querySelectorAll('#guest-app .interactive-card').forEach(card => card.addEventListener('click', () => setRole('guest')));
+
+    document.querySelectorAll('#business-app .btn, #customer-app .btn, #guest-app .btn').forEach(btn => {
+      btn.addEventListener('click', () => stateBadge.style.display = 'block');
     });
 
     document.querySelectorAll('.booking-form .btn').forEach(btn => {
-      btn.addEventListener('click', () => alert('Booking flow continued'));
+      btn.addEventListener('click', () => {
+        stateBadge.style.display = 'block';
+        stateBadge.textContent = 'Booking staged';
+        alert('Booking flow continued');
+      });
     });
-  </script>
+
+    document.querySelectorAll('.market-actions .pill').forEach(pill => pill.addEventListener('click', () => setRole('business')));
+    window.setRole = setRole;
+    setRole('guest');
+</script>
 </body>
 </html>
