@@ -114,8 +114,8 @@ footer{border-top:1px solid var(--line);padding:40px 24px;text-align:center;colo
 .auth-box{position:sticky;top:50%;transform:translateY(-50%);z-index:2;width:min(460px,calc(100vw - 48px));backdrop-filter:blur(10px);background:rgba(18,18,18,.88);border:1px solid rgba(212,175,55,.15)}
 .auth-void{height:180vh}
 
-.auth-wrap{min-height:100vh;display:block;position:relative;background:radial-gradient(circle at 50% 45%,rgba(212,175,55,.08),transparent 18%),linear-gradient(180deg,#0a0a0a 0%,#050505 100%);overflow-x:hidden;overflow-y:auto;padding:0}
-.auth-stage{position:relative;min-height:240vh}
+.auth-wrap{min-height:100vh;display:block;position:relative;background:linear-gradient(180deg,#0a0a0a 0%,#050505 100%);overflow-x:hidden;overflow-y:auto;padding:0}
+.auth-stage{position:relative;min-height:220vh}
 .auth-box{position:sticky;top:48vh;transform:translateY(-50%);width:min(460px,calc(100vw - 48px));margin:0 auto;z-index:3;background:rgba(18,18,18,.9);border:1px solid rgba(212,175,55,.12);box-shadow:0 30px 100px rgba(0,0,0,.55)}
 .auth-void-top{height:42vh}
 .auth-void-bottom{height:150vh}
