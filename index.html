@@ -20,6 +20,14 @@
     .hero p{font-size:20px;color:var(--muted);margin:0 0 32px}
     .btn{display:inline-block;background:var(--accent);color:var(--bg);padding:14px 32px;border-radius:4px;text-decoration:none;font-weight:600;font-size:16px;border:none;cursor:pointer;letter-spacing:0.3px}
     .btn:hover{background:var(--accent2)}
+    .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+    .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+    .search-row{display:flex;gap:12px;max-width:900px;margin:0 auto 20px}
+    .search-input{flex:1;padding:14px 16px;border-radius:4px;border:1px solid var(--line);background:var(--card);color:var(--text)}
+    .view-switcher{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:0 0 18px}
+    .interactive-card{cursor:pointer;transition:transform .15s ease,border-color .15s ease}
+    .interactive-card:hover{transform:translateY(-2px);border-color:var(--accent)}
+    .app-panel{scroll-margin-top:90px}
     .gateway{padding:60px 24px;text-align:center}
     .gateway h2{font-size:32px;margin:0 0 40px;font-weight:600;letter-spacing:-0.3px}
     .role-cards{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
@@ -97,46 +105,50 @@
       <div class="role-card">
         <h3>Business</h3>
         <p>Manage listings, availability, services, staff, and bookings</p>
-        <a href="#dashboard" class="btn">Business Login</a>
+        <a href="#business-app" class="btn">Business Login</a>
       </div>
       <div class="role-card">
         <h3>Customer</h3>
         <p>Save details, view past bookings, and rebook faster</p>
-        <a href="#booking" class="btn">Customer Login</a>
+        <a href="#customer-app" class="btn">Customer Login</a>
       </div>
       <div class="role-card">
         <h3>Guest</h3>
         <p>Book immediately with no account friction</p>
-        <a href="#booking" class="btn">Continue as Guest</a>
+        <a href="#guest-app" class="btn">Continue as Guest</a>
       </div>
     </div>
   </section>
 
   <section id="marketplace" class="marketplace">
     <h2>Find Services</h2>
+    <div class="search-row">
+      <input class="search-input" placeholder="Search for a store, service, or location" />
+      <button class="btn">Search</button>
+    </div>
     <div class="tile-grid">
-      <div class="tile tile-lg">
+      <div class="tile tile-lg interactive-card" onclick="openBusiness('Featured Barbers')">
         <h4>Featured Barbers</h4>
         <p>Priority placement for popular listings</p>
         <div class="market-actions"><span class="pill">Priority</span><span class="pill">Starred</span><span class="pill">Top visibility</span></div>
       </div>
-      <div class="tile tile-md">
+      <div class="tile tile-md interactive-card" onclick="openBusiness('Salons')">
         <h4>Salons</h4>
         <p>Haircare, coloring, and treatments</p>
       </div>
-      <div class="tile tile-sm">
+      <div class="tile tile-sm interactive-card" onclick="openBusiness('Studios')">
         <h4>Studios</h4>
         <p>Creative sessions</p>
       </div>
-      <div class="tile tile-md">
+      <div class="tile tile-md interactive-card" onclick="openBusiness('Clinics')">
         <h4>Clinics</h4>
         <p>Health and wellness services</p>
       </div>
-      <div class="tile tile-sm">
+      <div class="tile tile-sm interactive-card" onclick="openBusiness('Home Visits')">
         <h4>Home Visits</h4>
         <p>Mobile bookings</p>
       </div>
-      <div class="tile tile-lg priority">
+      <div class="tile tile-lg priority interactive-card" onclick="openPriority()">
         <h4>Priority Placement</h4>
         <p>Charge extra for boosted visibility and faster booking flow</p>
       </div>
@@ -229,42 +241,56 @@
     </div>
   </section>
 
-  <section id="dashboard" class="dashboard">
-    <h2>Business Dashboard</h2>
-    <p class="dash-note">Priority placement can be sold as an add-on, with boosted visibility, featured tiles, and faster booking access.</p>
+
+  <section id="business-app" class="dashboard app-panel">
+    <h2>Business View</h2>
+    <div class="view-switcher">
+      <button class="btn">Dashboard</button><button class="btn btn-ghost">Bookings</button><button class="btn btn-ghost">Listings</button><button class="btn btn-ghost">Priority</button>
+    </div>
+    <div class="dash-note">This view only focuses on managing the business.</div>
     <div class="dash-grid">
-      <div class="dash-section">
-        <h3>Manage Listings</h3>
-        <ul>
-          <p>Add/Edit services</p>
-          <p>Set availability</p>
-          <p>Configure pricing</p>
-          <p>Update branding</p>
-        </ul>
-      </div>
-      <div class="dash-section">
-        <h3>Priority Sales</h3>
-        <ul>
-          <p>Charge extra for priority</p>
-          <p>Boost tile placement</p>
-          <p>Promote starred vendors</p>
-          <p>Track upgraded listings</p>
-        </ul>
-      </div>
-      <div class="dash-section">
-        <h3>Booking Management</h3>
-        <ul>
-          <p>View upcoming bookings</p>
-          <p>Confirm appointment requests</p>
-          <p>Manage calendar</p>
-          <p>Send reminders</p>
-        </ul>
-      </div>
+      <div class="dash-section interactive-card"><h3>Overview</h3><p>Live bookings, revenue, and visibility.</p></div>
+      <div class="dash-section interactive-card"><h3>Services</h3><p>Add, edit, pause, and price services.</p></div>
+      <div class="dash-section interactive-card"><h3>Priority Sales</h3><p>Sell featured placement and boosts.</p></div>
+      <div class="dash-section interactive-card"><h3>Availability</h3><p>Open and close slots instantly.</p></div>
     </div>
   </section>
+
+  <section id="customer-app" class="dashboard app-panel">
+    <h2>Customer View</h2>
+    <div class="view-switcher">
+      <button class="btn">Booked</button><button class="btn btn-ghost">Starred</button><button class="btn btn-ghost">Profile</button><button class="btn btn-ghost">History</button>
+    </div>
+    <div class="dash-note">This view acts like a consumer account with saved places and bookings.</div>
+    <div class="dash-grid">
+      <div class="dash-section interactive-card"><h3>Booked Places</h3><p>View upcoming and past appointments.</p></div>
+      <div class="dash-section interactive-card"><h3>Starred Places</h3><p>Quick access to favourite businesses.</p></div>
+      <div class="dash-section interactive-card"><h3>Rebook</h3><p>One-tap repeat from history.</p></div>
+      <div class="dash-section interactive-card"><h3>Saved Data</h3><p>Auto-fill details and preferences.</p></div>
+    </div>
+  </section>
+
+  <section id="guest-app" class="dashboard app-panel">
+    <h2>Guest View</h2>
+    <div class="view-switcher">
+      <button class="btn">Search</button><button class="btn btn-ghost">Browse</button><button class="btn btn-ghost">Book</button><button class="btn btn-ghost">Nearby</button>
+    </div>
+    <div class="dash-note">This view always feels like a first-time visitor with search-first discovery.</div>
+    <div class="dash-grid">
+      <div class="dash-section interactive-card"><h3>Search Store</h3><p>Find the place you want to book.</p></div>
+      <div class="dash-section interactive-card"><h3>Fresh Browse</h3><p>Always open like a new user session.</p></div>
+      <div class="dash-section interactive-card"><h3>Book Fast</h3><p>Guest booking without account friction.</p></div>
+      <div class="dash-section interactive-card"><h3>Popular Nearby</h3><p>See what is trending locally.</p></div>
+    </div>
+  </section>
+
 
   <footer>
     <p>Steady Schedule · £4.59/month · No tiers · Built for convenience and reliability</p>
   </footer>
+  <script>
+    function openBusiness(name){alert('Opening business: ' + name)}
+    function openPriority(){alert('Priority placement options opened')}
+  </script>
 </body>
 </html>
