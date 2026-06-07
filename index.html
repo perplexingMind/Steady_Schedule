@@ -1,74 +1,57 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Steady Schedule</title>
-  <meta name="description" content="Reliable booking for small businesses with a calm, mobile-friendly experience for customers." />
-  <meta name="theme-color" content="#b08d57" />
-  <link rel="manifest" href="./site.webmanifest" />
-  <link rel="icon" href="./icon-192.png" sizes="192x192" />
-  <link rel="apple-touch-icon" href="./icon-192.png" />
-  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
   <style>
-    :root, [data-theme="light"] {--font-body:'Satoshi',Inter,sans-serif;--font-display:'Satoshi',Inter,sans-serif;--text-xs:clamp(.75rem,.7rem + .25vw,.875rem);--text-sm:clamp(.875rem,.8rem + .35vw,1rem);--text-base:clamp(1rem,.95rem + .25vw,1.125rem);--text-lg:clamp(1.125rem,1rem + .75vw,1.5rem);--text-xl:clamp(1.5rem,1.2rem + 1.25vw,2.25rem);--space-1:.25rem;--space-2:.5rem;--space-3:.75rem;--space-4:1rem;--space-5:1.25rem;--space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;--space-12:3rem;--space-16:4rem;--color-bg:#f6f0e3;--color-surface:#fbf6eb;--color-surface-2:#fffaf0;--color-surface-offset:#efe6d2;--color-surface-dynamic:#dccfb2;--color-divider:#d6c8a5;--color-border:#cdbb8b;--color-text:#111111;--color-text-muted:#64615b;--color-text-faint:#8f8b84;--color-text-inverse:#f9f8f4;--color-primary:#b08d57;--color-primary-hover:#9a7744;--color-primary-active:#7f6135;--color-primary-highlight:#efe2bf;--radius-sm:.375rem;--radius-md:.5rem;--radius-lg:.75rem;--radius-xl:1rem;--radius-full:9999px;--shadow-sm:0 1px 2px oklch(0.2 0.01 80 /.06);--shadow-md:0 4px 12px oklch(0.2 0.01 80 /.08);--shadow-lg:0 12px 32px oklch(0.2 0.01 80 /.12);--transition-interactive:180ms cubic-bezier(.16,1,.3,1)}
-    [data-theme="dark-disabled"] {--color-bg:#f6f0e3;--color-surface:#fbf6eb;--color-surface-2:#fffaf0;--color-surface-offset:#efe6d2;--color-surface-dynamic:#dccfb2;--color-divider:#d6c8a5;--color-border:#cdbb8b;--color-text:#e1dfdb;--color-text-muted:#b0aca5;--color-text-faint:#88837c;--color-text-inverse:#1b1a18;--color-primary:#b08d57;--color-primary-hover:#9a7744;--color-primary-active:#7f6135;--color-primary-highlight:#efe2bf;--shadow-sm:0 1px 2px oklch(0 0 0 /.2);--shadow-md:0 4px 12px oklch(0 0 0 /.3);--shadow-lg:0 12px 32px oklch(0 0 0 /.4)}
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{-webkit-text-size-adjust:none;text-size-adjust:none;scroll-behavior:smooth}body{min-height:100dvh;font-family:var(--font-body);font-size:var(--text-base);line-height:1.6;color:var(--color-text);background:var(--color-bg)}img,svg{display:block;max-width:100%;height:auto}button,input,select{font:inherit;color:inherit}a,button,input,select{transition:color var(--transition-interactive),background var(--transition-interactive),border-color var(--transition-interactive),box-shadow var(--transition-interactive)}a{text-decoration:none;color:inherit}button{cursor:pointer;border:none;background:none}:focus-visible{outline:2px solid var(--color-primary);outline-offset:3px;border-radius:var(--radius-sm)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.shell{display:grid;grid-template-columns:1.1fr .95fr;min-height:100dvh}.marketing{padding:var(--space-6);display:grid;gap:var(--space-5);align-content:start}.app-side{background:var(--color-surface);border-left:1px solid color-mix(in oklab,var(--color-text) 10%, transparent);display:grid;grid-template-rows:auto 1fr auto;min-height:100dvh}.topbar,.consumer-bar{display:flex;justify-content:space-between;align-items:center;gap:var(--space-3)}.brand{display:flex;align-items:center;gap:var(--space-3)}.brand-mark{width:38px;height:38px;border-radius:12px;background:var(--color-primary-highlight);display:grid;place-items:center;color:var(--color-primary)}.brand-mark svg{width:22px;height:22px}.brand strong{display:block;font-size:var(--text-sm)}.brand span{display:block;font-size:var(--text-xs);color:var(--color-text-muted)}.icon-btn,.btn,.choice,.slot,.ghost-link{min-height:44px;border-radius:var(--radius-full);border:1px solid color-mix(in oklab,var(--color-text) 12%, transparent);background:var(--color-surface);padding:.72rem 1rem}.icon-btn{width:44px;padding:0;display:grid;place-items:center}.btn-primary{background:var(--color-primary);color:var(--color-text-inverse);border-color:transparent}.btn-primary:hover{background:var(--color-primary-hover)}.btn-row{display:flex;gap:var(--space-3);flex-wrap:wrap}.card{background:var(--color-surface);border:1px solid color-mix(in oklab,var(--color-text) 10%, transparent);border-radius:var(--radius-xl);padding:var(--space-5);box-shadow:var(--shadow-sm)}.eyebrow{font-size:var(--text-xs);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-muted)}h1{font-size:var(--text-xl);line-height:1.06;max-width:14ch;margin-top:var(--space-2)}h2{font-size:var(--text-lg);line-height:1.15}p{max-width:68ch}.muted{color:var(--color-text-muted)}.faint{color:var(--color-text-faint)}.hero-copy{display:grid;gap:var(--space-4)}.hero-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-4)}.mini{padding:var(--space-4);border-radius:var(--radius-lg);background:var(--color-surface-2);border:1px solid color-mix(in oklab,var(--color-text) 8%, transparent)}.mini strong{display:block;font-size:var(--text-lg);font-variant-numeric:tabular-nums lining-nums}.install{display:flex;justify-content:space-between;gap:var(--space-4);align-items:center}.steps{display:grid;gap:var(--space-3)}.step{display:grid;grid-template-columns:auto 1fr;gap:var(--space-3);align-items:flex-start}.step-num{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--color-primary-highlight);color:var(--color-primary);font-size:var(--text-xs);font-weight:700}.quote{padding:var(--space-5);background:var(--color-surface-offset);border-radius:var(--radius-xl);border:1px solid color-mix(in oklab,var(--color-text) 8%, transparent)}.consumer-wrap{padding:var(--space-5);display:grid;grid-template-rows:auto 1fr auto;gap:var(--space-4);min-height:100dvh}.phone-app{display:grid;gap:var(--space-4);align-content:start}.consumer-card{background:var(--color-bg);border:1px solid color-mix(in oklab,var(--color-text) 10%, transparent);border-radius:28px;box-shadow:var(--shadow-md);padding:14px;max-width:420px;width:100%;margin:0 auto}.screen{background:var(--color-surface);border-radius:22px;padding:var(--space-4);display:grid;gap:var(--space-4)}.consumer-header{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--space-3)}.pill{display:inline-flex;padding:.35rem .65rem;border-radius:var(--radius-full);background:var(--color-primary-highlight);color:var(--color-primary);font-size:var(--text-xs);font-weight:700;letter-spacing:.04em;text-transform:uppercase}.choices,.slots{display:grid;gap:var(--space-3)}.choices{grid-template-columns:1fr 1fr 1fr}.choice,.slot{text-align:center;font-size:var(--text-sm)}.choice.active,.slot.active{background:var(--color-primary);color:var(--color-text-inverse);border-color:transparent}.availability{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3)}.summary{display:grid;gap:var(--space-3)}.row{display:flex;justify-content:space-between;gap:var(--space-3);align-items:center}.divider{height:1px;background:var(--color-divider)}.footer-note{font-size:var(--text-xs);color:var(--color-text-muted);text-align:center}.helper{display:grid;gap:var(--space-2)}.helper a{color:var(--color-primary)}
-    @media (max-width:960px){.shell{grid-template-columns:1fr}.app-side{border-left:none;border-top:1px solid color-mix(in oklab,var(--color-text) 10%, transparent)}.hero-grid{grid-template-columns:1fr}.choices{grid-template-columns:1fr 1fr 1fr}.consumer-wrap{min-height:auto}}
-    @media (max-width:640px){.marketing,.consumer-wrap{padding:var(--space-4)}.choices,.availability{grid-template-columns:1fr}.btn-row{display:grid}.topbar,.consumer-bar{align-items:flex-start}.consumer-header{flex-direction:column}.install{display:grid;justify-content:stretch}.shell{min-height:100dvh}}
-    @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 24px;
+    }
+    .card {
+      max-width: 640px;
+      background: #111827;
+      border: 1px solid #334155;
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.35);
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 2.5rem;
+    }
+    p {
+      line-height: 1.6;
+      color: #cbd5e1;
+    }
+    a.button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 20px;
+      background: #38bdf8;
+      color: #0f172a;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+    a.button:hover {
+      background: #7dd3fc;
+    }
   </style>
 </head>
 <body>
-  <a href="#consumer" class="sr-only">Skip to booking</a>
-  <div class="shell">
-    <section class="marketing">
-      <div class="topbar">
-        <div class="brand">
-          <div class="brand-mark" aria-label="Steady Schedule logo">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 6.5c0-1.9 1.6-3.5 3.5-3.5H16"></path><path d="M19 17.5c0 1.9-1.6 3.5-3.5 3.5H8"></path><path d="M8 4v5h5"></path><path d="M16 20v-5h-5"></path></svg>
-          </div>
-          <div><strong>Steady Schedule</strong><span>Simple, reliable booking</span></div>
-        </div>
-        <button class="icon-btn" data-theme-toggle-removed aria-label="Switch theme">◐</button>
-      </div>
-      <div class="hero-copy card">
-        <div><p class="eyebrow">Consumer-ready preview</p><h1>See the booking flow the way a customer would.</h1></div>
-        <p class="muted">This package is prepared like a small static PWA: landing section, installable manifest, service worker, icons, and a customer booking view ready for Cloudflare Pages.</p>
-        <div class="btn-row"><a class="btn btn-primary" href="#consumer">Open booking flow</a><button class="btn" id="installBtn" hidden>Install app</button></div>
-        <div class="hero-grid"><div class="mini"><p class="faint">Model</p><strong>Static PWA</strong><p class="muted">Cloudflare-ready</p></div><div class="mini"><p class="faint">Audience</p><strong>Mobile-first</strong><p class="muted">Consumers and owners</p></div><div class="mini"><p class="faint">Price idea</p><strong>£4.59</strong><p class="muted">Single simple plan</p></div></div>
-      </div>
-      <div class="card install"><div><p class="eyebrow">Deployment</p><h2>Ready for Cloudflare Pages</h2><p class="muted">Upload this folder as-is. The HTML file, manifest, service worker, and icons are already included.</p></div><div class="helper"><span class="pill">Static files only</span><span class="pill">No build step</span></div></div>
-      <div class="card steps"><div><p class="eyebrow">What’s next</p><h2>Immediate next layer</h2></div><div class="step"><span class="step-num">1</span><div><strong>Choose the final visual direction</strong><p class="muted">We can now style this toward barbers, studios, clinics, coaches, or creatives.</p></div></div><div class="step"><span class="step-num">2</span><div><strong>Add real data later</strong><p class="muted">Supabase or Cloudflare Workers can power real booking, reminders, and accounts.</p></div></div><div class="step"><span class="step-num">3</span><div><strong>Keep the customer flow simple</strong><p class="muted">One service, one time, one confirmation path beats feature clutter.</p></div></div></div>
-      <div class="quote"><p>“The right first version should feel dependable before it tries to feel clever.”</p></div>
-    </section>
-    <section class="app-side" id="consumer">
-      <div class="consumer-wrap">
-        <div class="consumer-bar"><div><p class="eyebrow">Customer booking</p><strong>Studio North</strong></div><span class="pill">Live preview</span></div>
-        <div class="phone-app">
-          <div class="consumer-card" aria-label="Consumer booking app preview">
-            <div class="screen">
-              <div class="consumer-header"><div><strong>Book your appointment</strong><p class="muted">Choose a service and a time that suits you.</p></div><span class="pill">2 mins</span></div>
-              <div><p class="eyebrow" style="margin-bottom:var(--space-3)">Service</p><div class="choices" role="tablist" aria-label="Services"><button class="choice active">Cut</button><button class="choice">Colour</button><button class="choice">Consult</button></div></div>
-              <div><p class="eyebrow" style="margin-bottom:var(--space-3)">Available today</p><div class="availability"><button class="slot">09:30</button><button class="slot active">10:15</button><button class="slot">11:00</button><button class="slot">12:30</button></div></div>
-              <div class="summary card" style="background:var(--color-surface-2);padding:var(--space-4);box-shadow:none"><div class="row"><span class="muted">Service</span><strong>Cut</strong></div><div class="row"><span class="muted">Date</span><strong>Thu 11 June</strong></div><div class="row"><span class="muted">Time</span><strong>10:15</strong></div><div class="divider"></div><div class="row"><span class="muted">Booking fee</span><strong>Free</strong></div></div>
-              <button class="btn btn-primary" id="confirmBtn">Confirm appointment</button>
-              <p class="footer-note">By continuing, you agree to receive a confirmation email.</p>
-            </div>
-          </div>
-        </div>
-        <p class="footer-note">Installable on supported phones and desktops after deployment.</p>
-      </div>
-    </section>
-  </div>
-  <script>
-    (function(){const root=document.documentElement;const toggle=document.querySelector('[data-theme-toggle-removed]');let theme=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';root.setAttribute('data-theme',theme);toggle.textContent=theme==='dark'?'☀':'◐';toggle.addEventListener('click',()=>{theme=theme==='dark'?'light':'dark';root.setAttribute('data-theme',theme);toggle.textContent=theme==='dark'?'☀':'◐';});})();
-    document.querySelectorAll('.choice').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.choice').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelector('.summary .row strong').textContent=btn.textContent;}));
-    document.querySelectorAll('.slot').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.slot').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.summary .row strong')[2].textContent=btn.textContent;}));
-    document.getElementById('confirmBtn').addEventListener('click',()=>{const card=document.querySelector('.summary');card.innerHTML='\n<div class="row"><span class="muted">Status</span><strong>Confirmed</strong></div>\n<div class="row"><span class="muted">Reference</span><strong>SS-1042</strong></div>\n<div class="divider"></div>\n<p class="muted">A confirmation email has been prepared in this demo flow.</p>';const btn=document.getElementById('confirmBtn');btn.textContent='Booked';btn.disabled=true;btn.style.opacity='.72';});
-    if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}
-    let deferredPrompt;const installBtn=document.getElementById('installBtn');window.addEventListener('beforeinstallprompt',(e)=>{e.preventDefault();deferredPrompt=e;installBtn.hidden=false;});installBtn.addEventListener('click',async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;installBtn.hidden=true;});
-  </script>
+  <main class="card">
+    <h1>Steady Schedule</h1>
+    <p>Your simple, focused space for staying organized and keeping on track.</p>
+    <a class="button" href="https://github.com/PerplexingMind/Steady_Schedule">View Project</a>
+  </main>
 </body>
 </html>
