@@ -182,3 +182,7 @@ body.auth-page{overflow:hidden}
 .tile-medium{grid-column:span 2;grid-row:span 2}
 .tile-small{grid-column:span 1;grid-row:span 2}
 @media (max-width:900px){.business-tile-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:auto}.tile-wide,.tile-tall,.tile-medium,.tile-small{grid-column:span 2;grid-row:auto}}
+
+.btn.is-loading{opacity:.8;pointer-events:none;position:relative}
+.btn.is-loading::after{content:"";width:14px;height:14px;border:2px solid rgba(0,0,0,.25);border-top-color:rgba(0,0,0,.75);border-radius:50%;display:inline-block;margin-left:10px;vertical-align:middle;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
