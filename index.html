@@ -4,54 +4,211 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Steady Schedule</title>
+  <link rel="manifest" href="manifest.json" />
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: #e2e8f0;
-      display: grid;
-      place-items: center;
-      min-height: 100vh;
-      text-align: center;
-      padding: 24px;
-    }
-    .card {
-      max-width: 640px;
-      background: #111827;
-      border: 1px solid #334155;
-      border-radius: 16px;
-      padding: 32px;
-      box-shadow: 0 12px 40px rgba(0,0,0,.35);
-    }
-    h1 {
-      margin-top: 0;
-      font-size: 2.5rem;
-    }
-    p {
-      line-height: 1.6;
-      color: #cbd5e1;
-    }
-    a.button {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 12px 20px;
-      background: #38bdf8;
-      color: #0f172a;
-      text-decoration: none;
-      border-radius: 10px;
-      font-weight: bold;
-    }
-    a.button:hover {
-      background: #7dd3fc;
-    }
+    :root{--bg:#0a0a0a;--card:#121212;--muted:#a89f91;--text:#f5f1e8;--accent:#d4af37;--accent2:#c5a028;--line:#2a2a2a}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    header{position:sticky;top:0;background:rgba(10,10,10,0.98);border-bottom:1px solid var(--line);padding:16px 0;z-index:100}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;max-width:1100px;margin:0 auto;padding:0 24px}
+    .logo{font-size:20px;font-weight:700;color:var(--accent);letter-spacing:0.5px}
+    nav a{margin-left:20px;color:var(--muted);text-decoration:none;font-size:14px;font-weight:500}
+    nav a:hover{color:var(--accent)}
+    .hero{text-align:center;padding:80px 24px;background:linear-gradient(180deg,rgba(212,175,55,0.06),transparent)}
+    .hero h1{font-size:48px;margin:0 0 16px;font-weight:700;letter-spacing:-0.5px}
+    .hero p{font-size:20px;color:var(--muted);margin:0 0 32px}
+    .btn{display:inline-block;background:var(--accent);color:var(--bg);padding:14px 32px;border-radius:4px;text-decoration:none;font-weight:600;font-size:16px;border:none;cursor:pointer;letter-spacing:0.3px}
+    .btn:hover{background:var(--accent2)}
+    .gateway{padding:60px 24px;text-align:center}
+    .gateway h2{font-size:32px;margin:0 0 40px;font-weight:600;letter-spacing:-0.3px}
+    .role-cards{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+    .role-card{background:var(--card);border:1px solid var(--line);padding:32px;border-radius:4px;width:280px;text-align:center;transition:transform 0.2s;border:1px solid var(--line)}
+    .role-card:hover{transform:translateY(-4px);border-color:var(--accent)}
+    .role-card h3{font-size:22px;margin:0 0 12px;color:var(--accent);font-weight:600}
+    .role-card p{color:var(--muted);margin:0 0 20px;font-size:14px;line-height:1.6}
+    .marketplace{padding:60px 24px;background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .marketplace h2{font-size:32px;margin:0 0 40px;text-align:center;font-weight:600}
+    .biz-grid{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+    .biz-card{background:var(--bg);border:1px solid var(--line);padding:20px;border-radius:4px;width:320px}
+    .biz-card h4{font-size:18px;margin:0 0 8px;color:var(--accent);font-weight:600}
+    .biz-card p{color:var(--muted);margin:0;font-size:14px;line-height:1.6}
+    .layers{padding:60px 24px}
+    .layers h2{font-size:32px;margin:0 0 40px;text-align:center;font-weight:600}
+    .layer-grid{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+    .layer{background:var(--card);border:1px solid var(--line);padding:24px;border-radius:4px;width:300px}
+    .layer h3{font-size:18px;margin:0 0 12px;color:var(--accent);font-weight:600}
+    .layer p{color:var(--muted);margin:0;font-size:14px;line-height:1.6}
+    .booking{padding:60px 24px;background:var(--card);border-top:1px solid var(--line)}
+    .booking h2{font-size:32px;margin:0 0 24px;text-align:center;font-weight:600}
+    .booking-form{max-width:500px;margin:0 auto;background:var(--bg);padding:32px;border-radius:4px;border:1px solid var(--line)}
+    .booking-form label{display:block;margin:0 0 8px;font-size:14px;color:var(--muted);font-weight:500}
+    .booking-form input,.booking-form select,.booking-form textarea{width:100%;padding:12px;margin:0 0 20px;border:1px solid var(--line);border-radius:4px;background:var(--card);color:var(--text);font-size:14px}
+    .booking-form textarea{min-height:80px}
+    .dashboard{padding:60px 24px}
+    .dashboard h2{font-size:32px;margin:0 0 40px;text-align:center;font-weight:600}
+    .dash-grid{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+    .dash-section{background:var(--card);border:1px solid var(--line);padding:24px;border-radius:4px;width:340px}
+    .dash-section h3{font-size:18px;margin:0 0 12px;color:var(--accent);font-weight:600}
+    .dash-section ul{margin:0 0 0;padding:0 0 0 20px;color:var(--muted);font-size:14px;line-height:1.8}
+    footer{padding:40px 24px;text-align:center;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+    @media(max-width:768px){.hero h1{font-size:32px}.role-cards{flex-direction:column}.biz-grid{flex-direction:column}}
   </style>
 </head>
 <body>
-  <main class="card">
-    <h1>Steady Schedule</h1>
-    <p>Your simple, focused space for staying organized and keeping on track.</p>
-    <a class="button" href="https://github.com/PerplexingMind/Steady_Schedule">View Project</a>
-  </main>
+  <header>
+    <div class="header-inner">
+      <div class="logo">Steady Schedule</div>
+      <nav>
+        <a href="#gateway">Login</a>
+        <a href="#marketplace">Marketplace</a>
+        <a href="#booking">Book</a>
+        <a href="#layers">Features</a>
+        <a href="#dashboard">Dashboard</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Book & Manage Services with Confidence</h1>
+    <p>One flat price. No tiers. Built for convenience and reliability.</p>
+    <a href="#gateway" class="btn">Get Started</a>
+  </section>
+
+  <section id="gateway" class="gateway">
+    <h2>Choose Your Access</h2>
+    <div class="role-cards">
+      <div class="role-card">
+        <h3>Business</h3>
+        <p>Manage listings, availability, services, staff, and bookings</p>
+        <a href="#dashboard" class="btn">Business Login</a>
+      </div>
+      <div class="role-card">
+        <h3>Customer</h3>
+        <p>Save details, view past bookings, and rebook faster</p>
+        <a href="#booking" class="btn">Customer Login</a>
+      </div>
+      <div class="role-card">
+        <h3>Guest</h3>
+        <p>Book immediately with no account friction</p>
+        <a href="#booking" class="btn">Continue as Guest</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="marketplace" class="marketplace">
+    <h2>Find Services</h2>
+    <div class="biz-grid">
+      <div class="biz-card">
+        <h4>Barber Shops</h4>
+        <p>Book cuts, trims, and styling sessions</p>
+      </div>
+      <div class="biz-card">
+        <h4>Salons</h4>
+        <p>Haircare, coloring, and treatments</p>
+      </div>
+      <div class="biz-card">
+        <h4>Studios</h4>
+        <p>Creative sessions and appointments</p>
+      </div>
+      <div class="biz-card">
+        <h4>Clinics</h4>
+        <p>Health and wellness services</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="booking" class="booking">
+    <h2>Book a Service</h2>
+    <div class="booking-form">
+      <label for="service">Service</label>
+      <select id="service">
+        <option>Cut & Style</option>
+        <option>Hair Coloring</option>
+        <option>Styling Session</option>
+        <option>Consultation</option>
+      </select>
+
+      <label for="date">Date</label>
+      <input type="date" id="date" />
+
+      <label for="time">Time</label>
+      <select id="time">
+        <option>9:00 AM</option>
+        <option>10:00 AM</option>
+        <option>11:00 AM</option>
+        <option>12:00 PM</option>
+        <option>1:00 PM</option>
+        <option>2:00 PM</option>
+      </select>
+
+      <label for="notes">Notes (optional)</label>
+      <textarea id="notes"></textarea>
+
+      <button class="btn" style="width:100%">Confirm Booking</button>
+    </div>
+  </section>
+
+  <section id="layers" class="layers">
+    <h2>7-Layer Architecture</h2>
+    <div class="layer-grid">
+      <div class="layer">
+        <h3>1. Gateway Layer</h3>
+        <p>Single entry screen for Business/Customer/Guest access selection</p>
+      </div>
+      <div class="layer">
+        <h3>2. Role Layer</h3>
+        <p>Separated flows for each user type with distinct permissions</p>
+      </div>
+      <div class="layer">
+        <h3>3. Marketplace Layer</h3>
+        <p>Browse public listings or access private links</p>
+      </div>
+      <div class="layer">
+        <h3>4. Discovery Layer</h3>
+        <p>Niche-specific categories and search functionality</p>
+      </div>
+      <div class="layer">
+        <h3>5. Booking Layer</h3>
+        <p>Availability viewing, time selection, and confirmation</p>
+      </div>
+      <div class="layer">
+        <h3>6. Business Layer</h3>
+        <p>Dashboard for managing listings, services, and bookings</p>
+      </div>
+      <div class="layer">
+        <h3>7. Customer Layer</h3>
+        <p>Account features for saving details and rebooking</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="dashboard" class="dashboard">
+    <h2>Business Dashboard</h2>
+    <div class="dash-grid">
+      <div class="dash-section">
+        <h3>Manage Listings</h3>
+        <ul>
+          <p>Add/Edit services</p>
+          <p>Set availability</p>
+          <p>Configure pricing</p>
+          <p>Update branding</p>
+        </ul>
+      </div>
+      <div class="dash-section">
+        <h3>Booking Management</h3>
+        <ul>
+          <p>View upcoming bookings</p>
+          <p>Confirm/appointment requests</p>
+          <p>Manage calendar</p>
+          <p>Send reminders</p>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Steady Schedule · £4.59/month · No tiers · Built for convenience and reliability</p>
+  </footer>
 </body>
 </html>
